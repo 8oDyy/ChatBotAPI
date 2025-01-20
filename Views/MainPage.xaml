@@ -1,0 +1,11 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ChatBotAPI.Views.MainPage"
+             Title="ChatBot">
+    <StackLayout Padding="20">
+        <Label Text="Chatbot" FontSize="24" HorizontalOptions="Center" />
+        <Editor x:Name="UserInputEditor" Placeholder="Entrez votre question..." AutoSize="TextChanges" />
+        <Button Text="Envoyer" Clicked="OnSendButtonClicked" />
+        <Label x:Name="ChatbotResponseLabel" Text="Réponse :" FontSize="18" VerticalOptions="StartAndExpand" />
+    </StackLayout>
+</ContentPage>
