@@ -1,0 +1,88 @@
+# Fichiers générés par l'environnement de développement
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Dossiers de sortie de compilation
+bin/
+obj/
+
+# JetBrains Rider
+*.iml
+.idea/
+.idea_modules/
+*.ipr
+*.iws
+out/
+
+# Logs, fichiers de débogage et rapports
+*.log
+*.tlog
+*.vscode/*
+*.swp
+*.pid
+*.sublime-workspace
+*.sublime-project
+*.tmp
+.vs/
+
+# Clés et configurations sensibles
+*.env
+*.key
+*.config
+appsettings.json
+appsettings.*.json
+
+# Fichiers temporaires
+*.tmp
+*.temp
+*.DS_Store
+Thumbs.db
+~*
+
+# Fichiers spécifiques à macOS/Linux/Windows
+*.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Fichiers de sauvegarde
+*.bak
+*.old
+*.swp
+*.swo
+*.swn
+
+# Dossiers spécifiques au SDK .NET
+project.lock.json
+project.fragment.lock.json
+artifacts/
+*.nuget.props
+*.nuget.targets
+
+# Fichiers des packages NuGet
+*.nupkg
+packages/
+
+# Fichiers de sortie de MAUI
+*.apk
+*.aab
+*.ipa
+*.dll
+*.pdb
+
+# Clés API (Ajoutez votre fichier contenant la clé API ici si applicable)
+*.json
+ApiKey.cs
+Secrets.cs
+
+# Exclure les fichiers utilisateurs Rider
+.idea/
+
