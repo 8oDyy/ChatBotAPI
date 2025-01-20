@@ -1,5 +1,6 @@
 using ChatBotAPI.Controllers;
 using Microsoft.Maui.Controls;
+using DotNetEnv;
 
 namespace ChatBotAPI.Views
 {
@@ -40,6 +41,7 @@ namespace ChatBotAPI.Views
                 Console.WriteLine($"Erreur : {ex.Message}");
                 ChatbotResponseLabel.Text = "Une erreur s'est produite.";
             }
+            UserInputEditor.Text = string.Empty;
         }
     }
 }

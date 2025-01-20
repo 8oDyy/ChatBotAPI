@@ -1,7 +1,5 @@
-using System.Net.Http;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 
 namespace ChatBotAPI.Models
@@ -9,76 +7,71 @@ namespace ChatBotAPI.Models
     public class ChatModel
     {
         private const string ApiUrl = "https://api.openai.com/v1/chat/completions";
-
-        private const string ApiKey ="VOTRE_CLE_API"; // Remplacez par votre clé API
+        private const string ApiKey ="VOTRE_CLÉ_API"; 
 
         public async Task<string> GetResponseFromOpenAI(string userInput)
-{
-    using var client = new HttpClient();
-    client.DefaultRequestHeaders.Add("Authorization", $"Bearer {ApiKey}");
-
-    var requestBody = new
-    {
-        model = "gpt-3.5-turbo",
-        messages = new[]
         {
+            using var client = new HttpClient();
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {ApiKey}");
+
+            var requestBody = new
+            {
+                model = "gpt-3.5-turbo",
+                messages = new[]
+            {
             new { role = "system", content = "Tu es un assistant qui repond au chat" },
             new { role = "user", content = userInput }
-        },
-        max_tokens = 150
-    };
+            },
+            max_tokens = 150
+            };
 
-    var json = JsonSerializer.Serialize(requestBody);
-    var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var json = JsonSerializer.Serialize(requestBody);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-    try
-    {
-        Console.WriteLine("Envoi de la requête...");
-        var response = await client.PostAsync(ApiUrl, content);
-
-        Console.WriteLine($"Statut de la réponse : {response.StatusCode}");
-        if (!response.IsSuccessStatusCode)
-        {
-            Console.WriteLine($"Erreur HTTP : {response.StatusCode}");
-            return "Une erreur s'est produite avec l'API.";
-        }
-
-        var responseContent = await response.Content.ReadAsStringAsync();
-        Console.WriteLine($"Réponse brute : {responseContent}");
-
-        // Désérialisation avec options
-        var options = new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true
-        };
-        var responseData = JsonSerializer.Deserialize<OpenAIResponse>(responseContent, options);
-
-        // Utiliser correctement le tableau Choices
-        if (responseData?.Choices != null && responseData.Choices.Length > 0)
-        {
-            var messageContent = responseData.Choices[0].Message.Content;
-            if (!string.IsNullOrWhiteSpace(messageContent))
+            try
             {
-                return messageContent;
-            }
-            else
-            {
-                Console.WriteLine("Le champ Content est vide.");
+                Console.WriteLine("Envoi de la requête...");
+                var response = await client.PostAsync(ApiUrl, content);
+
+                Console.WriteLine($"Statut de la réponse : {response.StatusCode}");
+                if (!response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine($"Erreur HTTP : {response.StatusCode}");
+                    return "Une erreur s'est produite avec l'API.";
+                }
+
+                var responseContent = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"Réponse brute : {responseContent}");
+
+                // Désérialisation avec options
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                var responseData = JsonSerializer.Deserialize<OpenAIResponse>(responseContent, options);
+                
+                if (responseData?.Choices != null && responseData.Choices.Length > 0)
+                {
+                    var messageContent = responseData.Choices[0].Message.Content;
+                    if (!string.IsNullOrWhiteSpace(messageContent))
+                    {
+                        return messageContent;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Le champ Content est vide.");
+                        return "Aucune réponse disponible.";
+                    }
+                }
+                Console.WriteLine("Le tableau Choices est vide ou null.");
                 return "Aucune réponse disponible.";
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erreur lors de la requête : {ex.Message}");
+                return "Une erreur s'est produite lors de la communication avec l'API.";
+            }
         }
-        else
-        {
-            Console.WriteLine("Le tableau Choices est vide ou null.");
-            return "Aucune réponse disponible.";
-        }
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"Erreur lors de la requête : {ex.Message}");
-        return "Une erreur s'est produite lors de la communication avec l'API.";
-    }
-}
 
         public class OpenAIResponse
         {
