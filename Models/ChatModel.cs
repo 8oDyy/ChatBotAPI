@@ -7,7 +7,7 @@ namespace ChatBotAPI.Models
     public class ChatModel
     {
         private const string ApiUrl = "https://api.openai.com/v1/chat/completions";
-        private const string ApiKey ="VOTRE_CLÉ_API"; 
+        private const string ApiKey ="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"; 
 
         public async Task<string> GetResponseFromOpenAI(string userInput)
         {

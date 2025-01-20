@@ -2,10 +2,37 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ChatBotAPI.Views.MainPage"
              Title="ChatBot">
-    <StackLayout Padding="20">
-        <Label Text="Chatbot" FontSize="24" HorizontalOptions="Center" />
-        <Editor x:Name="UserInputEditor" Placeholder="Entrez votre question..." AutoSize="TextChanges" />
-        <Button Text="Envoyer" Clicked="OnSendButtonClicked" />
-        <Label x:Name="ChatbotResponseLabel" Text="Réponse :" FontSize="18" VerticalOptions="StartAndExpand" />
+    <ContentPage.Resources>
+        <Style x:Key="UserMessageBubble" TargetType="Frame">
+            <Setter Property="BackgroundColor" Value="#DCF8C6" />
+            <Setter Property="CornerRadius" Value="20" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="Margin" Value="5" />
+        </Style>
+        <Style x:Key="BotMessageBubble" TargetType="Frame">
+            <Setter Property="BackgroundColor" Value="#E1E1E1" />
+            <Setter Property="CornerRadius" Value="20" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="Margin" Value="5" />
+        </Style>
+    </ContentPage.Resources>
+
+    <StackLayout Padding="10" BackgroundColor="White">
+        <!-- Zone d'affichage des messages -->
+        <CollectionView x:Name="MessagesCollectionView" ItemsSource="{Binding Messages}" VerticalOptions="FillAndExpand">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Style="{Binding BubbleStyle}" HorizontalOptions="{Binding Alignment}" HasShadow="False">
+                        <Label Text="{Binding Text}" TextColor="Black" FontSize="16" />
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Zone d'entrée utilisateur -->
+        <StackLayout Orientation="Horizontal" Padding="10" BackgroundColor="#F8F8F8">
+            <Editor x:Name="UserInputEditor" Placeholder="Entrez votre question..." AutoSize="TextChanges" WidthRequest="300" />
+            <Button Text="Envoyer" Clicked="OnSendButtonClicked" VerticalOptions="Center" />
+        </StackLayout>
     </StackLayout>
 </ContentPage>
