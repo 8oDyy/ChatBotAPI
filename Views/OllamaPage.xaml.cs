@@ -1,8 +1,8 @@
 namespace ChatBotAPI.Views
 {
-    public partial class MainPage : Shell
+    public partial class OllamaPage : ContentPage
     {
-        public MainPage()
+        public OllamaPage()
         {
             InitializeComponent();
         }

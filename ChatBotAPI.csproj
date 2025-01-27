@@ -68,9 +68,30 @@
     </ItemGroup>
 
     <ItemGroup>
+      <MauiXaml Update="Views\ChatGPTPage.xaml">
+        <SubType>Designer</SubType>
+      </MauiXaml>
       <MauiXaml Update="Views\MainPage.xaml">
         <SubType>Designer</SubType>
       </MauiXaml>
+      <MauiXaml Update="Views\OllamaPage.xaml">
+        <SubType>Designer</SubType>
+      </MauiXaml>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Views\ChatGPTPage.xaml.cs">
+        <DependentUpon>ChatGPTPage.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\MainPage.xaml.cs">
+        <DependentUpon>MainPage.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\OllamaPage.xaml.cs">
+        <DependentUpon>OllamaPage.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
     </ItemGroup>
 
 </Project>

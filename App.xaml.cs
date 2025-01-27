@@ -1,12 +1,14 @@
 ﻿using ChatBotAPI.Views;
 
-namespace ChatBotAPI;
-
-public partial class App : Application
+namespace ChatBotAPI
 {
-    public App()
+    public partial class App : Application
     {
-        InitializeComponent();
-        MainPage = new MainPage();
+        public App()
+        {
+            InitializeComponent();
+
+            MainPage = new MainPage();
+        }
     }
 }
