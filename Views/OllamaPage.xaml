@@ -1,10 +1,22 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ChatBotAPI.Views.OllamaPage"
-             Title="DALL-E">
+             x:Class="ChatBotAPI.Views.OllamaPage">
     <StackLayout>
-        <Label Text="Bienvenue sur Ollama" 
-               VerticalOptions="CenterAndExpand" 
-               HorizontalOptions="CenterAndExpand" />
+        <CollectionView x:Name="MessagesCollectionView"
+                        ItemsSource="{Binding Messages}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="{Binding Alignment}">
+                        <Frame BackgroundColor="LightGray" Padding="10">
+                            <Label Text="{Binding Text}" />
+                        </Frame>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <StackLayout Orientation="Horizontal">
+            <Entry x:Name="UserInputEditor" Placeholder="Tapez votre message ici..." HorizontalOptions="FillAndExpand" />
+            <Button Text="Envoyer" Clicked="OnSendButtonClicked" />
+        </StackLayout>
     </StackLayout>
 </ContentPage>
